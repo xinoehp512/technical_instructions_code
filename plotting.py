@@ -33,3 +33,9 @@ def save_plot(fig: Figure, filename):
     folder_path = Path("images")
     folder_path.mkdir(exist_ok=True)
     fig.savefig(f"images/{filename}")
+
+
+def reset_plot(fig: Figure):
+    fig.clf()
+    ax = fig.add_subplot(111)
+    return ax
