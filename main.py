@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 
 from plotting import *
 
+# Place your plots in main, then run this file.
+# Images will appear in the "images" folder.
 
 DATA_FILE_NAME = "apple_quality.csv"  # Change this to the name of your data file.
 
@@ -14,38 +16,39 @@ def filter_data(data, function):
 
 def main():
     data = pd.read_csv(DATA_FILE_NAME)
-    fig, ax = plt.subplots()
 
     # Data Filtering
-    good_apples = data[data["Quality"] == "good"]
-    bad_apples = data[data["Quality"] == "bad"]
+    good_apples = filter_data(data, lambda row: row["Quality"] == "good")
+    bad_apples = filter_data(data, lambda row: row["Quality"] == "bad")
 
-    def filter_good(row):
-        return row["Quality"] == "good"
+    acid_apples = filter_data(data, lambda row: row["Acidity"] <= 0)
+    alkaline_apples = filter_data(data, lambda row: row["Acidity"] > 0)
 
-    def filter_bad(row):
-        return row["Quality"] == "bad"
-    good_apples = filter_data(data, filter_good)
-    bad_apples = filter_data(data, filter_bad)
-
-    # good_apples = filter_data(data, lambda row: row["Quality"] == "good")
-
-    def get_acid(row):
-        return row["Acidity"]
+    # Bar Chart
+    fig, ax = plt.subplots()
+    bar_chart(ax, x_values=["Acid Apples", "Alkaline Apples"], y_values=[len(acid_apples), len(alkaline_apples)])
+    save_plot(fig, "barchart.png")
+    plt.show()
 
     # Pie Chart
-    print(data["Crunchiness"] > data["Juiciness"])
-    pie_chart(ax, [len(good_apples), len(bad_apples)], ["Good", "Bad"])
-    # save_plot(fig, "piechart.png")
-    plt.show()
-#
     fig, ax = plt.subplots()
+    pie_chart(ax, [len(good_apples), len(bad_apples)], ["Good", "Bad"])
+    save_plot(fig, "piechart.png")
+    plt.show()
 
     # Histogram
+    fig, ax = plt.subplots()
     histogram(ax, good_apples["Size"], number_of_bins=20)
     histogram(ax, bad_apples["Size"], number_of_bins=20)
     set_titles(ax, title="Good vs. Bad Apples", x_label="Size", y_label="Frequency")
     save_plot(fig, "histogram.png")
+    plt.show()
+
+    # Scatter Plot
+    fig, ax = plt.subplots()
+    scatter_plot(ax, x_values=data["Juiciness"], y_values=data["Acidity"])
+    set_titles(ax, title="Acidity vs Juiciness", x_label="Juciness", y_label="Acidity")
+    save_plot(fig, "scatterplot.png")
     plt.show()
 
 
