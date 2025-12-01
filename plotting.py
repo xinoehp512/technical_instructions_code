@@ -39,7 +39,3 @@ def reset_plot(fig: Figure):
     fig.clf()
     ax = fig.add_subplot(111)
     return ax
-
-
-def filter_data(data, function):
-    return data[function(data)]

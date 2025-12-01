@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from filter import filter_data
 from plotting import *
 
 
@@ -8,11 +9,16 @@ def example():
     data = pd.read_csv("apple_quality.csv")
 
     # Data Filtering
-    good_apples = filter_data(data, lambda row: row["Quality"] == "good")
-    bad_apples = filter_data(data, lambda row: row["Quality"] == "bad")
+    def filter_good(row): return row["Quality"] == "good"
+    def filter_bad(row): return row["Quality"] == "bad"
+    def filter_acid(row): return row["Acidity"] <= 0
+    def filter_alkaline(row): return row["Acidity"] > 0
 
-    acid_apples = filter_data(data, lambda row: row["Acidity"] <= 0)
-    alkaline_apples = filter_data(data, lambda row: row["Acidity"] > 0)
+    good_apples = filter_data(data, filter_good)
+    bad_apples = filter_data(data, filter_bad)
+
+    acid_apples = filter_data(data, filter_acid)
+    alkaline_apples = filter_data(data, filter_alkaline)
 
     # Bar Chart
     fig, ax = plt.subplots()
@@ -40,10 +46,6 @@ def example():
     set_titles(ax, title="Acidity vs Juiciness", x_label="Juciness", y_label="Acidity")
     save_plot(fig, "scatterplot.png")
     plt.show()
-
-
-def filter_data(data, function):
-    return data[function(data)]
 
 
 if __name__ == "__main__":
