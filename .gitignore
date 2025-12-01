@@ -11,3 +11,6 @@ wheels/
 
 kaggle_downloads/
 images/
+.python-version
+pyproject.toml
+uv.lock
