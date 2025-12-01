@@ -27,5 +27,5 @@ def remove_null_rows():
 
 
 if __name__ == "__main__":
-    # remove_null_rows()
-    main()
+    remove_null_rows()
+    # main()
