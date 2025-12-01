@@ -10,11 +10,11 @@ from plotting import *
 DATA_FILE_NAME = "apple_quality.csv"  # Change this to the name of your data file.
 
 
-def filter_data(data, function):
-    return data[function(data)]
-
-
 def main():
+    example()
+
+
+def example():
     data = pd.read_csv(DATA_FILE_NAME)
 
     # Data Filtering
@@ -50,6 +50,10 @@ def main():
     set_titles(ax, title="Acidity vs Juiciness", x_label="Juciness", y_label="Acidity")
     save_plot(fig, "scatterplot.png")
     plt.show()
+
+
+def filter_data(data, function):
+    return data[function(data)]
 
 
 if __name__ == "__main__":
