@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from filter import filter_data
 from plotting import *
 
 # Place your plots in main, then run this file.
