@@ -14,7 +14,7 @@ def main():
     data = pd.read_csv(DATA_FILE_NAME)
     fig, ax = plt.subplots()
 
-    # Draw your plot here.
+    # Put the code to draw your graph here.
 
     save_plot(fig, PLOT_FILE_NAME)
     plt.show()

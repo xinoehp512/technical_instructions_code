@@ -1,13 +1,12 @@
 from typing import Callable
 import pandas as pd
-from filter import filter_data
 
 
 PATH_TO_INPUT_FILE = "*.csv"
 PATH_TO_OUTPUT_FILE = "*.csv"
 
 
-def filter_data(data: pd.DataFrame, function: Callable[[pd.DataFrame], pd.Series[bool]]):
+def filter_data(data: pd.DataFrame, function: Callable[[pd.DataFrame], pd.Series]):
     return data[function(data)]
 
 

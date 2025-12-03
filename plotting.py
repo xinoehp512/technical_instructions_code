@@ -32,7 +32,8 @@ def set_titles(ax: Axes, x_label="", y_label="", title=""):
 def save_plot(fig: Figure, filename):
     folder_path = Path("images")
     folder_path.mkdir(exist_ok=True)
-    fig.savefig(f"images/{filename}")
+    filename_path = folder_path / f"{filename}"
+    fig.savefig(filename_path)
 
 
 def reset_plot(fig: Figure):
